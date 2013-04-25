@@ -1,0 +1,457 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <title>sfPot Marseille avril 2013</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=792, user-scalable=no">
+        <link rel="stylesheet" href="shower/themes/ribbon/styles/screen.css">
+        <link href="prettify/prettify.css" type="text/css" rel="stylesheet" />
+        <!--
+        To apply styles to the certain slides
+        set slide ID to get needed elements
+        -->
+        <style>
+            #Cover h2 {
+                margin:65px 0 0;
+                color:#FFF;
+                text-align:center;
+                font-size:70px;
+            }
+            #Cover p {
+                margin:10px 0 0;
+                text-align:center;
+                color:#FFF;
+                font-style:italic;
+                font-size:20px;
+            }
+            #Cover p a {
+                color:#FFF;
+            }
+            #Picture h2 {
+                color:#FFF;
+            }
+            #SeeMore h2 {
+                font-size:100px
+            }
+            #SeeMore img {
+                width:0.72em;
+                height:0.72em;
+            }
+        </style>
+    </head>
+    <body class="list" onload="prettyPrint()">
+        <header class="caption">
+        <h1>Cache</h1>
+        <p>sfPot avril 2013</p>
+        </header>
+
+        <section class="slide cover">
+            <div>
+                <h2 style="text-align: center; color: #FFF">Cache</h2>
+                <p style="text-align: center; color: #FFF">SfPot Marseille avril 2013</p>
+                <img src="http://labs.openviewpartners.com/files/2012/11/bxp135660.jpg" style="opacity: 0.3">
+            </div>
+        </section>
+
+        <section class="slide">
+            <div>
+                <h2>Merci d'être là ...</h2>
+                <p>On est à l'écoute, hésitez pas à nous poser des questions, suggestions ...</p>
+                    <ul>
+                        <li>afsy.fr (qui devrait évoluer prochaînement)</li>
+                        <li><a href="https://groups.google.com/forum/?hl=fr&fromgroups=#!forum/asso-afsy">Google groups</a></li>
+                        <li>Twitter: assoafsy</li>
+                    </ul>
+            </div>
+        </section>
+
+        <section class="slide">
+        <div>
+            <h2>Définition</h2>
+            <figure>
+                <blockquote>
+                    <p>Une mémoire cache ou antémémoire est, en informatique, une mémoire qui enregistre temporairement des copies de données provenant d'une autre source de donnée, afin de diminuer le temps d'accès (en lecture ou en écriture)</p>
+                </blockquote>
+                <figcaption>Wikipedia</figcaption>
+            </figure>
+        </div>
+        </section>
+
+        <section class="slide">
+            <div>
+                <img src="pictures/humans-love-repetition.jpg">
+                <p>Les ordinateurs non ...</p>
+            </div>
+        </section>
+
+        <section class="slide">
+        <div>
+            <h2>HIT/MISS</h2>
+            <p>Cacher, c'est simple !</p>
+            <pre class="prettyprint" style="font-size: 0.6em">
+if ($cache->has('utilisateur1')) { // HIT
+    return $cache-&gt;get('utilisateur1');
+} else { // MISS
+    $cache->set('utilisateur1', $something);
+    return $result;
+}</pre>
+            </div>
+        </section>
+
+        <section class="slide">
+        <div>
+            <h2>Plusieurs niveaux de cache</h2>
+            <ol>
+                <li>Language (opcode, apc, etc...)</li>
+                <li class="next">Applicatif (Doctrine, Symfony ou autre)</li>
+                <li class="next">HTTP</li>
+            </ol>
+        </div>
+        </section>
+
+        <section class="slide">
+        <div>
+            <h2>Cache applicatif</h2>
+            <p>Prenons l'exemple de Symfony2</p>
+            <ol>
+                <li>Configuration</li>
+                <li class="next">Metadatas (annotations, model mapping, etc..)</li>
+                <li class="next">Twig templates</li>
+                <li class="next">Service Container</li>
+                <li class="next">etc...</li>
+            </ol>
+        </div>
+        </section>
+        <section class="slide"><div>
+            <h2>Vous pourriez vous en servir pour ?</h2>
+            <ul>
+                <li>Résultats de requêtes SQL</li>
+                <li>View (mais on va en reparler :))</li>
+                <li>Flat tables</li>
+                <li>Traitement d'une resource</li>
+                <li>etc ...</li>
+            </ul>
+        </div></section>
+
+        <section class="slide">
+        <div>
+            <h2>Données "statiques"</h2>
+            <p>
+                Nous ne devons pas les traiter à chaque fois !!!!! Elles doivent être cachées, puis le cache doit être purgé quand nécessaire.
+            </p>
+<pre class="prettyprint" style="font-size: 0.8em">
+app/console cache:clear --env=prod
+# or
+rm -rf app/cache/*</pre>
+        </div>
+        </section>
+
+        <section class="slide"><div>
+            <h2>Cache warmup</h2>
+            <p>Créé le cache pour éviter que quelqu'un n'ai à le faire</p>
+            <pre class="prettyprint" style="font-size: 0.8em">app/console cache:warmup--env=prod</pre>
+            <p>Il est possible d'ajouter facilement des services qui warmup un cache.</p>
+        </div></section>
+        <section class="slide"><div>
+            <h2>Backend de cache applicatif</h2>
+            <ol>
+                <li>APC</li>
+                <li>Memcache</li>
+                <li>Redis</li>
+                <li>Filesystem</li>
+                <li>Mysql</li>
+                <li>etc...</li>
+            </ol>
+        </div></section>
+        <section class="slide shout">
+        <div>
+            <h2>HTTP</h2>
+        </div>
+        </section>
+
+        <section class="slide">
+        <div>
+            <embed src="pictures/http.svg" type="image/svg+xml" />
+        </div>
+        </section>
+
+        <section class="slide shout">
+        <div>
+            <h2>REVERSE PROXY</h2>
+        </div>
+        </section>
+
+        <section class="slide">
+        <div>
+            <embed src="pictures/reverseproxy.svg" type="image/svg+xml"/>
+        </div>
+        </section>
+
+        <section class="slide">
+            <div>
+                <blockquote style="font-size: 0.8em">
+                    Oui mais mon chef de l'exploitation veut pas installer Varnish ou squid ou ... !
+                </blockquote>
+                <p>Symfony en fournit un. Moins performant mais c'est mieux que rien !</p>
+<pre class="prettyprint" style="font-size: 0.4em">
+require_once __DIR__.'/../app/AppKernel.php';
+require_once __DIR__.'/../app/AppCache.php'; // <--- uncomment here
+
+$kernel = new AppKernel('prod', false);
+$kernel->loadClassCache();
+$kernel = new AppCache($kernel); // <---- uncomment here
+$request = Request::createFromGlobals();
+$response = $kernel->handle($request);
+$response->send();
+$kernel->terminate($request, $response);
+</pre>
+            </div>
+        </section>
+
+        <section class="slide">
+            <div>
+            <h2>Qu'est-ce qui est cachable ?</h2>
+                <ol>
+                    <li>GET (récupérer une ressource): <strong>OUI</strong></li>
+                    <li>POST (créer une ressource): <strong>NON</strong></li>
+                    <li>PUT (éditer une ressource): <strong>NON</strong></li>
+                    <li>DELETE (supprimer une ressource): <strong>NON</strong></li>
+                </ol>
+        </div>
+        </section>
+
+        <section class="slide shout">
+            <div>
+            <h2>Validation du cache</h2>
+        </div>
+        </section>
+
+        <section class="slide">
+            <div>
+                <h2>How-to</h2>
+                <p>HTTP fournit plusieurs headers qui vont permettre de gérer le cache de chaque resource.</p>
+            </div>
+        </section>
+
+        <section class="slide">
+            <div>
+                <h2>E-tag</h2>
+<pre class="prettyprint" style="font-size: 0.5em">
+//$article  = ....;
+$response = new Response();
+$response->setEtag('article-'.$article->getId());
+$response->setPublic();
+
+if ($response->isNotModified($this->getRequest())) {
+    return $response;
+}
+
+// here we have to create the view, etc ...
+
+return $response;
+</pre>
+            </div>
+        </section>
+
+        <section class="slide">
+            <div>
+                <h2>Last-Modified</h2>
+                <p>Même principe que E-tag ...</p>
+<pre class="prettyprint" style="font-size: 0.5em">
+//$article  = ....;
+$response = new Response();
+$response->setLastModified($article->getUpdatedAt());
+// ...
+</pre>
+            </div>
+        </section>
+
+        <section class="slide">
+            <div>
+                <h2>Public/Private</h2>
+
+                <p>
+                    Un cache privé sera fournit qu'à une machine.
+                    <br />
+                    Un cache public est ... public.
+                </p>
+            </div>
+        </section>
+
+        <section class="slide">
+            <div>
+                <h2>Vary</h2>
+                <p style="font-size: 0.8em; margin-bottom: 0">Permet de différencier une ressource via d'autre critères que l'URL</p>
+
+<pre class="prettyprint" style="font-size: 0.5em">
+$response->setVary('Content-Type');
+# Accept-Language, Accept-Encoding, User-Agent
+
+GET /article/1, Content-Type: application/json
+{"title": "Article 1"}
+
+GET /article/1, Content-Type: text/html
+&lt;h1&gt;Article1&lt;/h1&gt;
+</pre>
+
+            </div>
+        </section>
+
+
+        <section class="slide">
+            <div>
+                <h2>Mais aussi</h2>
+                <ol>
+                    <li>Expires</li>
+                    <li>Max-age</li>
+                    <li>etc ....</li>
+                </ol>
+                <p class="note">http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html</p>
+            </div>
+        </section>
+
+        <section class="slide shout">
+            <div>
+            <h2>Invalidation du cache</h2>
+        </div>
+        </section>
+
+        <section class="slide">
+            <div>
+                <p>
+                    Si vous n'invalider pas le cache manuellement, il attendra d'expirer pour se regénérer.<br />
+                    Utilisez les méthodes HTTP PURGE/BAN<br />
+                </p>
+                </p>
+<pre class="prettyprint" style="font-size: 0.5em">
+PURGE /resource/1.json
+
+Response: 200
+content: Resource PURGED
+</pre>
+                <p class="note">Pensez à sécuriser ces méthodes !</p>
+            </div>
+        </section>
+
+        <section class="slide">
+            <div>
+                <h2>ESI</h2>
+                <p>
+                    Inclure une ressource dans une autre<br />
+                </p>
+
+<pre class="prettyprint" style="font-size: 0.5em">
+&lt;html&gt;
+    &lt;!-- ...... --&gt;
+    &lt;body&gt;
+        Articles:
+        &lt;esi:include src="http://..." /&gt;
+</pre>
+            </div>
+        </section>
+        <section class="slide"><div>
+            <h2>Cas pratique</h2>
+            <div>
+                <img src="pictures/exemple.png">
+            </div>
+        </div></section>
+        <section class="slide"><div>
+<pre class="prettyprint" style="font-size: 0.5em">
+&lt;html&gt;
+    &lt;!-- Afficher le haut (login ...). Cela pourrait être aussi dans un esi ou un cache private --&gt;
+    &lt;aside&gt;
+        &lt;!-- Ce cache est partagé sur toutes les pages. !--&gt;
+        &lt;esi:include src="http://domain.tld/menu.html" /&gt;
+    &lt;/aside&gt;
+    &lt;!-- Utilisé seulement sur cette page mais inutile de recréer cette page à chaque fois. !--&gt;
+    &lt;esi:include src="http://domain.tld/article/chuck-testa.html" /&gt;
+</pre>
+        </div></section>
+
+        <section class="slide">
+            <div>
+                <h2>ESI vs hinclude</h2>
+                <p>
+                Les ESI sont intégrés à symfony depuis la version 2.0<br />
+                Support de hinclude ajouté sur 2.1
+                </p>
+
+<pre class="prettyprint" style="font-size: 0.5em">
+{% render url('route_name', { standalone: 'esi' }) %}
+{% render url('route_name', { standalone: 'hinclude' }) %}
+</pre>
+            </div>
+        </section>
+
+        <section class="slide"><div>
+            <h2>Très pratique</h2>
+            <p>Le contenu retourné peut-être caché intégralement mais comporter une partie dynamique.</p>
+            <p>Ces ressources peuvent être utilisées à plusieurs endroits.</p>
+        </div></section>
+
+        <section class="slide">
+            <div>
+                <h2>Perfomances</h2>
+                <p>Le cache HTTP est largement plus performant qu'un cache applicatif.</p>
+                <p>Grâce au cache HTTP, l'utilisateur n'a même pas à attendre que l'application ou l'environnement soit initialisé.</p>
+            </div>
+        </section>
+
+        <section class="slide">
+            <div>
+                <h2>Cache HTTP vs Nothing</h2>
+                <ul>
+                    <li>“Hello world“ sans cache HTTP: <strong>~100ms</strong>, avec: <strong>7ms</strong></li>
+                    <li>“Home page magento“ sans cache HTTP: <strong>~3000ms</strong>, avec: <strong>~7ms</strong></li>
+                    <li>Notre api est environ 4x plus rapide.</li>
+                </ul>
+                <p class="note">*Chiffres non contractuels</p>
+            </div>
+        </section>
+
+        <section class="slide">
+            <div>
+                <p>Avec le cache HTTP, votre seul ennemi est le réseau ...</p>
+                <img src="http://i.imgur.com/PqIYN.gif" />
+            </div>
+        </section>
+
+        <section class="slide">
+            <div>
+                <h2>Conclusion</h2>
+                <div style="float: left; width: 50%;">
+                    <h3 style="font-size: 1.2em; font-weight: bold;">Les plus</h3>
+                    <ul>
+                        <li>Simple</li>
+                        <li>Rapide</li>
+                        <li>Supporte des fortes charges</li>
+                        <li>Très facile à mettre en place</li>
+                    </ul>
+                </div>
+                <div style="float: left; width: 50%;">
+                    <h3 style="font-size: 1.2em; font-weight: bold;">Les moins</h3>
+                    <ul>
+                        <li>Gérer l'invalidation</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide">
+            <div>
+                <img src="http://www.actuaries.org.uk/sites/all/files/questions400.jpg">
+            </div>
+        </section>
+
+
+            <p class="badge"><a href="https://github.com/shower/shower">Fork me on Github</a></p>
+            <!--
+            To hide progress bar from entire presentation
+            just remove “progress” element.
+            -->
+            <div class="progress"><div></div></div>
+            <script src="shower/shower.min.js"></script>
+            <script type="text/javascript" src="prettify/prettify.js"></script>
+            <!-- Copyright © 2013 Yours Truly, Famous Inc. -->
+        </body>
+    </html>
