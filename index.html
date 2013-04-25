@@ -58,7 +58,7 @@
                 <h2>Merci d'être là ...</h2>
                 <p>On est à l'écoute, hésitez pas à nous poser des questions, suggestions ...</p>
                     <ul>
-                        <li>afsy.fr (qui devrait évoluer prochaînement)</li>
+                        <li>afsy.fr (qui devrait évoluer prochainement)</li>
                         <li><a href="https://groups.google.com/forum/?hl=fr&fromgroups=#!forum/asso-afsy">Google groups</a></li>
                         <li>Twitter: assoafsy</li>
                     </ul>
@@ -75,13 +75,6 @@
                 <figcaption>Wikipedia</figcaption>
             </figure>
         </div>
-        </section>
-
-        <section class="slide">
-            <div>
-                <img src="pictures/humans-love-repetition.jpg">
-                <p>Les ordinateurs non ...</p>
-            </div>
         </section>
 
         <section class="slide">
@@ -210,13 +203,25 @@ $kernel->terminate($request, $response);
 
         <section class="slide">
             <div>
-            <h2>Qu'est-ce qui est cachable ?</h2>
-                <ol>
-                    <li>GET (récupérer une ressource): <strong>OUI</strong></li>
-                    <li>POST (créer une ressource): <strong>NON</strong></li>
-                    <li>PUT (éditer une ressource): <strong>NON</strong></li>
-                    <li>DELETE (supprimer une ressource): <strong>NON</strong></li>
-                </ol>
+            <h2>Verbes qui peuvent être cachés</h2>
+                <div style="float: left; width: 50%">
+                    <h3 style="font-size: 1.2em; font-weight: bold; color: green;">OUI</h3>
+                    <ul>
+                        <li>GET</li>
+                        <li>HEAD</li>
+                        <li>OPTIONS</li>
+                    </ul>
+                </div>
+                <div style="float: left; width: 50%">
+                    <h3 style="font-size: 1.2em; font-weight: bold; color: red;">NON</h3>
+                    <ul>
+                        <li>POST</li>
+                        <li>PUT</li>
+                        <li>DELETE</li>
+                        <li>LINK</li>
+                        <li>....</li>
+                    </ul>
+                </div>
         </div>
         </section>
 
@@ -442,9 +447,17 @@ content: Resource PURGED
                 <img src="http://www.actuaries.org.uk/sites/all/files/questions400.jpg">
             </div>
         </section>
+        <section class="slide cover">
+            <div>
+                <img src="pictures/bg.png">
+                <h2 style="color: white; font-size: 3em; text-shadow: 3px 3px #000000;">Merci</h2>
+                <p class="note" style="text-shadow: 3px 3px #000000;">@steph_py</p>
+                <p class="note" style="text-shadow: 3px 3px #000000;">http://verylastroom.com/</p>
+            </div>
+        </section>
 
 
-            <p class="badge"><a href="https://github.com/shower/shower">Fork me on Github</a></p>
+            <p class="badge"><a href="https://github.com/stephpy/sfpot-marseille-avril-2013">Fork me on Github</a></p>
             <!--
             To hide progress bar from entire presentation
             just remove “progress” element.
