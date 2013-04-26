@@ -142,7 +142,7 @@ rm -rf app/cache/*</pre>
         <section class="slide"><div>
             <h2>Cache warmup</h2>
             <p>Créé le cache pour éviter que quelqu'un n'ai à le faire</p>
-            <pre class="prettyprint" style="font-size: 0.8em">app/console cache:warmup--env=prod</pre>
+            <pre class="prettyprint" style="font-size: 0.8em">app/console cache:warmup--env=prod --no-debug</pre>
             <p>Il est possible d'ajouter facilement des services qui warmup un cache.</p>
         </div></section>
         <section class="slide"><div>
